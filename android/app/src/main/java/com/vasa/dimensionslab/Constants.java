@@ -2,7 +2,7 @@ package com.vasa.dimensionslab;
 
 public class Constants {
 	public interface ACTION {
-		public static int ACTION_GET_CONTENT = 1;
+		public static int ACTION_GET_FILE = 1;
  	}
  
  	public interface NOTIFICATION_ID {

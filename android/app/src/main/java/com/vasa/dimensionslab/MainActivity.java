@@ -1,30 +1,48 @@
 package com.vasa.dimensionslab;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
-import android.provider.MediaStore;
-import android.database.Cursor;
+import android.widget.TextView;
+import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
 
-        Button b = null;
+    Uri uri = null;
+
+    Button selectFileButton = null;
+    Button stlViewerButton = null;
+    TextView filePathTextView = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        b = (Button)findViewById(R.id.button);
-        b.setOnClickListener(new View.OnClickListener() {
+        selectFileButton = (Button)findViewById(R.id.selectfilebutton);
+        selectFileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBrowse(v);
             }
         });
+
+        stlViewerButton = (Button)findViewById(R.id.stlviewerbutton);
+        stlViewerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), STLViewActivity.class);
+                intent.putExtra("stlUri", uri.toString());
+                startActivity(intent);
+            }
+        });
+
+        filePathTextView = (TextView)findViewById(R.id.filepathtextview);
     }
 
     public void onBrowse(View view) {
@@ -33,11 +51,11 @@ public class MainActivity extends AppCompatActivity {
 
         chooseFile = new Intent(Intent.ACTION_GET_CONTENT);
         //chooseFile.addCategory(Intent.CATEGORY_OPENABLE);
-        chooseFile.setType("file/*");
+        chooseFile.setType("application/vnd.ms-pkistl");
 
         intent = Intent.createChooser(chooseFile, "choose a file");
 
-        startActivityForResult(intent, Constants.ACTION.ACTION_GET_CONTENT);
+        startActivityForResult(intent, Constants.ACTION.ACTION_GET_FILE);
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -45,9 +63,9 @@ public class MainActivity extends AppCompatActivity {
             return;
 
         String path = "";
-        if (requestCode == Constants.ACTION.ACTION_GET_CONTENT) {
-            Uri uri = data.getData();
-            String FilePath = getRealPathFromUri(uri);
+        if (requestCode == Constants.ACTION.ACTION_GET_FILE) {
+            uri = data.getData();
+            filePathTextView.setText(uri.toString());
         }
     }
 
