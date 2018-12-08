@@ -1,21 +1,22 @@
 package com.vasa.dimensionslab.view;
 
-import java.io.IOException;
-import java.io.InputStream;
-
-import com.vasa.dimensionslab.R;
-import com.vasa.dimensionslab.object.STLObject;
-import com.vasa.dimensionslab.renderer.STLRenderer;
-import com.vasa.dimensionslab.util.IOUtils;
-import com.vasa.dimensionslab.util.Log;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.PointF;
 import android.net.Uri;
 import android.opengl.GLSurfaceView;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.Toast;
+
+import com.vasa.dimensionslab.Constants;
+import com.vasa.dimensionslab.object.STLObject;
+import com.vasa.dimensionslab.renderer.STLRenderer;
+import com.vasa.dimensionslab.util.IOUtils;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 public class STLView extends GLSurfaceView {
 
@@ -24,6 +25,7 @@ public class STLView extends GLSurfaceView {
 
 	public STLView(Context context, Uri uri) {
 		super(context);
+		Log.i(Constants.TAGS.STLVIEW_TAG,"STLView:");
 
 		this.uri = uri;
 
@@ -57,6 +59,7 @@ public class STLView extends GLSurfaceView {
 	 * @return
 	 */
 	private byte[] getSTLBytes(Context context, Uri uri) {
+		Log.i(Constants.TAGS.STLVIEW_TAG,"getSTLBytes:");
 		byte[] stlBytes = null;
 		InputStream inputStream = null;
 		try {
@@ -74,7 +77,7 @@ public class STLView extends GLSurfaceView {
 	private float previousY;
 
 	private void changeDistance(float distance) {
-		Log.i("distance:" + distance);
+		Log.i(Constants.TAGS.STLVIEW_TAG,"distance:" + distance);
 		stlRenderer.distanceZ = distance;
 		STLRenderer.requestRedraw();
 		requestRender();
@@ -83,10 +86,12 @@ public class STLView extends GLSurfaceView {
 	private boolean isRotate = true;
 
 	public boolean isRotate() {
+		Log.i(Constants.TAGS.STLVIEW_TAG,"isRotate:");
 		return isRotate;
 	}
 
 	public void setRotate(boolean isRotate) {
+		Log.i(Constants.TAGS.STLVIEW_TAG,"setRotate:");
 		this.isRotate = isRotate;
 	}
 
@@ -107,6 +112,7 @@ public class STLView extends GLSurfaceView {
 
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
+		Log.i(Constants.TAGS.STLVIEW_TAG,"onTouchEvent:");
 		switch (event.getAction() & MotionEvent.ACTION_MASK) {
 			// starts pinch
 			case MotionEvent.ACTION_POINTER_DOWN:
@@ -217,6 +223,7 @@ public class STLView extends GLSurfaceView {
 	 * @return pinched distance
 	 */
 	private float getPinchDistance(MotionEvent event) {
+		Log.i(Constants.TAGS.STLVIEW_TAG,"getPinchDistance:");
 		float x = event.getX(0) - event.getX(1);
 		float y = event.getY(0) - event.getY(1);
 		return (float)Math.sqrt(x * x + y * y);
@@ -228,11 +235,13 @@ public class STLView extends GLSurfaceView {
 	 * @param pt pinched point
 	 */
 	private void getPinchCenterPoint(MotionEvent event, PointF pt) {
+		Log.i(Constants.TAGS.STLVIEW_TAG,"getPinchCenterPoint:");
 		pt.x = (event.getX(0) + event.getX(1)) * 0.5f;
 		pt.y = (event.getY(0) + event.getY(1)) * 0.5f;
 	}
 
 	public Uri getUri() {
+		Log.i(Constants.TAGS.STLVIEW_TAG,"getUri:");
 		return uri;
 	}
 

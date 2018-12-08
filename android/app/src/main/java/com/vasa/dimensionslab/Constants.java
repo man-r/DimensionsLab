@@ -52,5 +52,11 @@ public class Constants {
 	public interface TAGS {
  		public static final String TAG = "manar";
  		public static final String SED_BROADCAST = "SED_BROADCAST";
+ 		public static final String OBJECT_TAG = "OBJECT_TAG";
+ 		public static final String RENDER_TAG = "RENDER_TAG";
+ 		public static final String UTILS_TAG = "UTILS_TAG";
+ 		public static final String STLVIEW_TAG = "STLVIEW_TAG";
+ 		public static final String STLVIEWACT_TAG = "STLVIEWACT_TAG";
+
  	}
 }

@@ -9,10 +9,11 @@ import java.util.List;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
+import com.vasa.dimensionslab.Constants;
 import com.vasa.dimensionslab.object.STLObject;
-import com.vasa.dimensionslab.util.Log;
 import android.opengl.GLSurfaceView.Renderer;
 import android.opengl.GLU;
+import android.util.Log;
 
 public class STLRenderer implements Renderer {
 	public static final int FRAME_BUFFER_COUNT = 2;
@@ -34,14 +35,17 @@ public class STLRenderer implements Renderer {
 	private STLObject stlObject;
 	
 	public STLRenderer(STLObject stlObject) {
+		Log.i(Constants.TAGS.RENDER_TAG,"STLRenderer");
 		this.stlObject = stlObject;
 	}
 
 	public static void requestRedraw() {
+		Log.i(Constants.TAGS.RENDER_TAG,"requestRedraw");
 		bufferCounter = FRAME_BUFFER_COUNT;
 	}
 
 	private void drawGrids(GL10 gl) {
+		Log.i(Constants.TAGS.RENDER_TAG,"drawGrids");
 		List<Float> lineList = new ArrayList<Float>();
 		
 		for (int x = -100; x <= 100; x += 5) {
@@ -132,15 +136,22 @@ public class STLRenderer implements Renderer {
 	}
 	
 	private FloatBuffer getFloatBufferFromArray(float[] vertexArray) {
-		ByteBuffer vbb = ByteBuffer.allocateDirect(vertexArray.length * 4);
+		Log.i(Constants.TAGS.RENDER_TAG,"getFloatBufferFromArray");
+		ByteBuffer vbb = ByteBuffer.allocateDirect(vertexArray.length * 40);
+		Log.i(Constants.TAGS.RENDER_TAG,"getFloatBufferFromArray1");
 		vbb.order(ByteOrder.nativeOrder());
+		Log.i(Constants.TAGS.RENDER_TAG,"getFloatBufferFromArray2");
 		FloatBuffer triangleBuffer = vbb.asFloatBuffer();
+		Log.i(Constants.TAGS.RENDER_TAG,"getFloatBufferFromArray3");
 		triangleBuffer.put(vertexArray);
+		Log.i(Constants.TAGS.RENDER_TAG,"getFloatBufferFromArray4");
 		triangleBuffer.position(0);
+		Log.i(Constants.TAGS.RENDER_TAG,"getFloatBufferFromArray5");
 		return triangleBuffer;
 	}
 
 	private FloatBuffer getFloatBufferFromList(List<Float> vertexList) {
+		Log.i(Constants.TAGS.RENDER_TAG,"getFloatBufferFromList");
 		ByteBuffer vbb = ByteBuffer.allocateDirect(vertexList.size() * 4);
 		vbb.order(ByteOrder.nativeOrder());
 		FloatBuffer triangleBuffer = vbb.asFloatBuffer();
@@ -155,6 +166,7 @@ public class STLRenderer implements Renderer {
 
 	@Override
 	public void onSurfaceChanged(GL10 gl, int width, int height) {
+		Log.i(Constants.TAGS.RENDER_TAG,"onSurfaceChanged");
 		float aspectRatio = (float) width / height;
 
 		gl.glViewport(0, 0, width, height);
@@ -163,12 +175,12 @@ public class STLRenderer implements Renderer {
 		gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
 
 		if (stlObject != null) {
-			Log.i("maxX:" + stlObject.maxX);
-			Log.i("minX:" + stlObject.minX);
-			Log.i("maxY:" + stlObject.maxY);
-			Log.i("minY:" + stlObject.minY);
-			Log.i("maxZ:" + stlObject.maxZ);
-			Log.i("minZ:" + stlObject.minZ);
+			Log.i(Constants.TAGS.RENDER_TAG,"maxX:" + stlObject.maxX);
+			Log.i(Constants.TAGS.RENDER_TAG,"minX:" + stlObject.minX);
+			Log.i(Constants.TAGS.RENDER_TAG,"maxY:" + stlObject.maxY);
+			Log.i(Constants.TAGS.RENDER_TAG,"minY:" + stlObject.minY);
+			Log.i(Constants.TAGS.RENDER_TAG,"maxZ:" + stlObject.maxZ);
+			Log.i(Constants.TAGS.RENDER_TAG,"minZ:" + stlObject.minZ);
 		}
 
 		GLU.gluPerspective(gl, 45f, aspectRatio, 1f, 5000f);// (stlObject.maxZ - stlObject.minZ) * 10f + 100f);
@@ -179,6 +191,7 @@ public class STLRenderer implements Renderer {
 	
 	@Override
 	public void onSurfaceCreated(GL10 gl, EGLConfig config) {
+		Log.i(Constants.TAGS.RENDER_TAG,"onSurfaceCreated");
 
 		gl.glClearColor(0f, 0f, 0f, 0.5f);
 

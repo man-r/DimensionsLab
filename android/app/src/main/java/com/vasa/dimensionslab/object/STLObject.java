@@ -1,5 +1,14 @@
 package com.vasa.dimensionslab.object;
 
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.os.AsyncTask;
+import android.util.Log;
+import android.widget.Toast;
+
+import com.vasa.dimensionslab.Constants;
+import com.vasa.dimensionslab.renderer.STLRenderer;
+
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
@@ -7,14 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.microedition.khronos.opengles.GL10;
-
-import com.vasa.dimensionslab.R;
-import com.vasa.dimensionslab.renderer.STLRenderer;
-import com.vasa.dimensionslab.util.Log;
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.os.AsyncTask;
-import android.widget.Toast;
 
 public class STLObject {
 	byte[] stlBytes = null;
@@ -130,7 +131,7 @@ public class STLObject {
 						normalList.add(Float.parseFloat(normalValue[0]));
 						normalList.add(Float.parseFloat(normalValue[1]));
 						normalList.add(Float.parseFloat(normalValue[2]));
-						Log.i("normal add");
+						Log.i(Constants.TAGS.OBJECT_TAG,"normal add");
 					}
 					if (string.startsWith("vertex ")) {
 						string = string.replaceFirst("vertex ", "");
@@ -142,7 +143,7 @@ public class STLObject {
 						vertexList.add(x);
 						vertexList.add(y);
 						vertexList.add(z);
-						Log.i("vertex add");
+						Log.i(Constants.TAGS.OBJECT_TAG,"vertex add");
 					}
 					
 					if (i % (stlLines.length / 50) == 0) {
@@ -158,7 +159,7 @@ public class STLObject {
 				normalList.clear();
 				
 				int vectorSize = getIntWithLittleEndian(stlBytes, 80);
-				Log.i("vectorSize:" + vectorSize);
+				Log.i(Constants.TAGS.OBJECT_TAG,"vectorSize:" + vectorSize);
 				
 				progressDialog.setMax(vectorSize);
 				for (int i = 0; i < vectorSize; i++) {
@@ -203,10 +204,10 @@ public class STLObject {
 				List<Float> processResult = null;
 				try {
 					if (isText(stlBytes[0])) {
-						Log.i("trying text...");
+						Log.i(Constants.TAGS.OBJECT_TAG,"trying text...");
 						processResult = processText(new String(stlBytes[0]));
 					} else {
-						Log.i("trying binary...");
+						Log.i(Constants.TAGS.OBJECT_TAG,"trying binary...");
 						processResult = processBinary(stlBytes[0]);
 					}
 				} catch (Exception e) {
@@ -225,14 +226,15 @@ public class STLObject {
 			
 			@Override
 			protected void onPostExecute(List<Float> vertexList) {
-				
-				Log.i("normalList.size:" + normalList.size());
-				Log.i("vertexList.size:" + vertexList.size());
+
+				Log.i(Constants.TAGS.OBJECT_TAG,"normalList.size:" + normalList.size());
+				Log.i(Constants.TAGS.OBJECT_TAG,"vertexList.size:" + vertexList.size());
 				
 				if (normalList.size() < 1 || vertexList.size() < 1) {
 					Toast.makeText(context, "Failed to read the STL file.", Toast.LENGTH_LONG).show();
 					
 					progressDialog.dismiss();
+					Log.i(Constants.TAGS.OBJECT_TAG,"fAILS dismiss");
 					return;
 				}
 				
@@ -246,6 +248,8 @@ public class STLObject {
 				STLRenderer.requestRedraw();
 
 				progressDialog.dismiss();
+				Log.i(Constants.TAGS.OBJECT_TAG,"dismiss");
+				
 			}
 		};
 

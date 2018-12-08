@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.CompoundButton;
@@ -14,7 +15,6 @@ import android.widget.ImageButton;
 import android.widget.ToggleButton;
 
 import com.vasa.dimensionslab.renderer.STLRenderer;
-import com.vasa.dimensionslab.util.Log;
 import com.vasa.dimensionslab.view.STLView;
 
 public class STLViewActivity extends Activity {
@@ -36,8 +36,9 @@ public class STLViewActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
+        Log.i(Constants.TAGS.STLVIEWACT_TAG, "OnResume");
         if (stlView != null) {
-            Log.i("onResume");
+            Log.i(Constants.TAGS.STLVIEWACT_TAG, "OnResume");
             STLRenderer.requestRedraw();
             stlView.onResume();
         }
@@ -46,8 +47,9 @@ public class STLViewActivity extends Activity {
     @Override
     protected void onPause() {
         super.onPause();
+        Log.i(Constants.TAGS.STLVIEWACT_TAG,"onPause");
         if (stlView != null) {
-            Log.i("onPause");
+            Log.i(Constants.TAGS.STLVIEWACT_TAG,"onPause");
             stlView.onPause();
         }
     }
@@ -55,7 +57,7 @@ public class STLViewActivity extends Activity {
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        Log.i("onRestoreInstanceState");
+        Log.i(Constants.TAGS.STLVIEWACT_TAG,"onRestoreInstanceState");
         Parcelable stlFileName = savedInstanceState.getParcelable("STLFileName");
         if (stlFileName != null) {
             setUpViews((Uri) stlFileName);
@@ -68,14 +70,16 @@ public class STLViewActivity extends Activity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        Log.i(Constants.TAGS.STLVIEWACT_TAG,"onSaveInstanceState");
         if (stlView != null) {
-            Log.i("onSaveInstanceState");
+            Log.i(Constants.TAGS.STLVIEWACT_TAG,"onSaveInstanceState");
             outState.putParcelable("STLFileName", stlView.getUri());
             outState.putBoolean("isRotate", stlView.isRotate());
         }
     }
 
     private void setUpViews(Uri uri) {
+        Log.i(Constants.TAGS.STLVIEWACT_TAG,"setUpViews");
         setContentView(R.layout.activity_stlview);
         final ToggleButton toggleButton = (ToggleButton) findViewById(R.id.rotateOrMoveToggleButton);
         toggleButton.setOnCheckedChangeListener(new OnCheckedChangeListener() {
@@ -97,6 +101,7 @@ public class STLViewActivity extends Activity {
         });
 
         if (uri != null) {
+            Log.i(Constants.TAGS.STLVIEWACT_TAG,"setUpViews uri != null");
             setTitle(uri.getPath().substring(uri.getPath().lastIndexOf("/") + 1));
 
             FrameLayout relativeLayout = (FrameLayout) findViewById(R.id.stlFrameLayout);
