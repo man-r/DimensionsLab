@@ -23,7 +23,10 @@
         <activity
             android:name=".PreferencesActivity"
             android:label="@string/title_activity_preferences"
-            android:theme="@android:style/Theme.NoTitleBar" ></activity>
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".PrentingSetting"
+            android:label="@string/title_activity_prenting_setting"></activity>
     </application>
 
 </manifest>
