@@ -16,6 +16,7 @@ public class Constants {
 		public static final int INTERNET = 5;
 		public static final int READ_PHONE_STATE = 6;
 		public static final int WRITE_EXTERNAL_STORAGE = 7;
+		public static final int READ_EXTERNAL_STORAGE = 11;
 		public static final int CAMERA = 8;
 		public static final int RECORD_AUDIO = 9;
 		public static final int USE_FINGERPRINT = 10;
@@ -57,6 +58,6 @@ public class Constants {
  		public static final String UTILS_TAG = "UTILS_TAG";
  		public static final String STLVIEW_TAG = "STLVIEW_TAG";
  		public static final String STLVIEWACT_TAG = "STLVIEWACT_TAG";
-
+		public static final String STLPARSER_TAG = "STLPARSER_TAG";
  	}
 }

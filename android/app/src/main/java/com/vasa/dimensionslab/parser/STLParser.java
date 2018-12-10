@@ -24,6 +24,10 @@ SOFTWARE.
 
 package com.vasa.dimensionslab.parser;
 
+import android.util.Log;
+
+import com.vasa.dimensionslab.Constants;
+
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -62,6 +66,8 @@ public class STLParser {
 	 * formatted
 	 */
 	public static List<Triangle> parseSTLFile(Path filepath) throws IOException{
+		Log.i(Constants.TAGS.STLPARSER_TAG, "Parsing STL file");
+
 		byte[] allBytes = Files.readAllBytes(filepath);
 		// determine if it is ASCII or binary STL
 
@@ -161,7 +167,8 @@ public class STLParser {
 	 * formatted
 	 */
 	public static List<Triangle> readASCII(String content) {
-		Logger.getLogger(STLParser.class.getName()).log(Level.FINEST,"Parsing ASCII STL format");
+		Log.i(Constants.TAGS.STLPARSER_TAG, "Parsing ASCII STL format");
+
 		// string is lowercase
 		ArrayList<Triangle> triangles = new ArrayList<>();
 		
@@ -225,7 +232,8 @@ public class STLParser {
 	 * formatted
 	 */
 	public static List<Triangle> readBinary(byte[] allBytes) {
-		Logger.getLogger(STLParser.class.getName()).log(Level.FINEST,"Parsing binary STL format");
+		Log.i(Constants.TAGS.STLPARSER_TAG, "Parsing binary STL format");
+
 		DataInputStream in = new DataInputStream(new ByteArrayInputStream(allBytes));
 		ArrayList<Triangle> triangles = new ArrayList<>();
 		try{
@@ -261,7 +269,7 @@ public class STLParser {
 		}catch(IOException ex){
 			// IO exceptions are impossible with byte array input streams, 
 			// but still need to be caught
-			Logger.getLogger(STLParser.class.getName()).log(Level.SEVERE, "HOLY SHIT! A ByteArrayInputStream threw an exception!", ex);
+			Log.e(Constants.TAGS.STLPARSER_TAG, "HOLY SHIT! A ByteArrayInputStream threw an exception!", ex);
 		}
 		return triangles;
 	}
