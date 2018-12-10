@@ -1,6 +1,6 @@
 package com.vasa.dimensionslab;
 
-import android.net.Uri;
+import java.net.URI;
 import android.os.Bundle;
 import android.app.Activity;
 import android.util.Log;
