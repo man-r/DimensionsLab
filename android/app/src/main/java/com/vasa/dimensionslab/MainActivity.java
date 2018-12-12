@@ -38,8 +38,9 @@ public class MainActivity extends Activity {
         stlViewerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), PrentingSetting.class);
-                intent.putExtra("stlUri", getRealPathFromUri(uri));
+                Intent intent = new Intent(getApplicationContext(), STLViewActivity.class);
+                intent.putExtra("stlPath", getRealPathFromUri(uri));
+                intent.putExtra("stlUri", uri.toString());
                 startActivity(intent);
             }
         });
