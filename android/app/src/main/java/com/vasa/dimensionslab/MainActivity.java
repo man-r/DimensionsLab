@@ -5,10 +5,13 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.util.Log;
+import java.io.File;
 
 public class MainActivity extends Activity {
 
@@ -35,13 +38,18 @@ public class MainActivity extends Activity {
         stlViewerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), PrentingSetting.class);
+                Intent intent = new Intent(getApplicationContext(), STLViewActivity.class);
+                intent.putExtra("stlPath", getRealPathFromUri(uri));
                 intent.putExtra("stlUri", uri.toString());
                 startActivity(intent);
             }
         });
 
         filePathTextView = (TextView)findViewById(R.id.filepathtextview);
+        File f = new File(Environment.getExternalStorageDirectory().getPath());
+        filePathTextView.setText(Environment.getExternalStorageState() + " - " + f.getAbsolutePath());
+
+
     }
 
     public void onBrowse(View view) {
@@ -64,21 +72,15 @@ public class MainActivity extends Activity {
         String path = "";
         if (requestCode == Constants.ACTION.ACTION_GET_FILE) {
             uri = data.getData();
-            filePathTextView.setText(uri.toString());
+            path = getRealPathFromUri(uri);
+            filePathTextView.setText(path);
         }
     }
 
     public String getRealPathFromUri(Uri contentUri) {
-        String [] proj = {MediaStore.Images.Media.DATA};
-        Cursor cursor = getContentResolver().query(contentUri, proj, null, null, null);
-
-        if (cursor == null) {
-            return null;
-        }
-
-        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-        cursor.moveToFirst();
-
-        return cursor.getString(column_index);
+        String path = contentUri.getPath();
+        path = path.substring(1+path.indexOf(":"));
+        path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + path;
+        return path;
     }
 }

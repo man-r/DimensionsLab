@@ -23,7 +23,7 @@ import java.util.List;
 
 public class PrentingSetting extends Activity {
 
-    Uri uri = null;
+    String path = null;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -31,13 +31,13 @@ public class PrentingSetting extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prenting_setting);
 
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            uri = Uri.parse(extras.getString("stlUri"));
-        }
+         Bundle extras = getIntent().getExtras();
+         if (extras != null) {
+             path = extras.getString("stlUri");
+         }
 
-        Log.i(Constants.TAGS.STLVIEWACT_TAG, uri.getPath());
-        getStlDetails();
+         Log.i(Constants.TAGS.STLVIEWACT_TAG, path);
+         getPermissions();
     }
 
     void getPermissions() {
@@ -80,11 +80,10 @@ public class PrentingSetting extends Activity {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void getStlDetails() {
-        String path = uri.getPath(); // "/mnt/sdcard/FileName.mp3"
 
         Log.i(Constants.TAGS.STLVIEWACT_TAG, "getStlDetails");
         try {
-            File f = new File(new URI(path).getPath());
+            File f = new File(path);
             Log.i(Constants.TAGS.STLVIEWACT_TAG, "getStlDetails");
             List<Triangle> mesh = STLParser.parseSTLFile(f.toPath());
 
@@ -93,9 +92,6 @@ public class PrentingSetting extends Activity {
             }
         } catch (IOException ex) {
             Log.e(Constants.TAGS.STLVIEWACT_TAG, "IOException",ex);
-        } catch (URISyntaxException ex) {
-            Log.e(Constants.TAGS.STLVIEWACT_TAG, "URISyntaxException",ex);
-        }
+        } 
     }
-
 }
