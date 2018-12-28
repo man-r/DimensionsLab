@@ -24,6 +24,8 @@ SOFTWARE.
 
 package com.vasa.dimensionslab.parser;
 
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.util.Log;
 
 import com.vasa.dimensionslab.Constants;
@@ -65,6 +67,7 @@ public class STLParser {
 	 * @throws IllegalArgumentException Thrown if the STL is not properly 
 	 * formatted
 	 */
+	@RequiresApi(api = Build.VERSION_CODES.O)
 	public static List<Triangle> parseSTLFile(Path filepath) throws IOException{
 		Log.i(Constants.TAGS.STLPARSER_TAG, "Parsing STL file");
 

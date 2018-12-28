@@ -1,9 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PrentingSetting">
+    tools:context=".PrentingSetting"
+    android:orientation="vertical"
+    >
+    <TextView
+        android:id="@+id/minx"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="minx"
+        android:gravity="center" />
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/miny"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="miny"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/minz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="minz"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/maxx"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="maxx"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/maxy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="maxy"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/maxz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="maxz"
+        android:gravity="center" />
+
+</LinearLayout>

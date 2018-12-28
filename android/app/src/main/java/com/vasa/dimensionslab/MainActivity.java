@@ -28,6 +28,7 @@ public class MainActivity extends Activity {
 
     ImageButton selectFileButton = null;
     Button stlViewerButton = null;
+    Button myrequestbutton = null;
     TextView filePathTextView = null;
 
     @Override
@@ -54,13 +55,21 @@ public class MainActivity extends Activity {
         stlViewerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), STLViewActivity.class);
+                Intent intent = new Intent(getApplicationContext(), PrentingSetting.class);
                 intent.putExtra("stlPath", getRealPathFromUri(uri));
                 intent.putExtra("stlUri", uri.toString());
                 startActivity(intent);
             }
         });
 
+        myrequestbutton = (Button)findViewById(R.id.myrequestbutton);
+        myrequestbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ListViewExampleActivity.class);
+                startActivity(intent);
+            }
+        });
         filePathTextView = (TextView)findViewById(R.id.filepathtextview);
         File f = new File(Environment.getExternalStorageDirectory().getPath());
         filePathTextView.setText(Environment.getExternalStorageState() + " - " + f.getAbsolutePath());
@@ -105,11 +114,8 @@ public class MainActivity extends Activity {
 
         RotateAnimation rotate = new RotateAnimation(0, 360, Animation.RELATIVE_TO_SELF,
                 0.5f,  Animation.RELATIVE_TO_SELF, 0.5f);
-        rotate.setRepeatCount(Animation.INFINITE);
+        //rotate.setRepeatCount(Animation.INFINITE);
         rotate.setDuration(500);
         selectFileButton.startAnimation(rotate);
-//        float deg = selectFileButton.getRotation() + 360F;
-//        selectFileButton.animate().rotation(deg).setInterpolator(new AccelerateDecelerateInterpolator());
-
     }
 }
