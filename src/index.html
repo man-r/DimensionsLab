@@ -1,0 +1,79 @@
+<div class="container">
+
+	<h1>Avatar Upload Example</h1>
+
+	
+	<div class="row">
+		<div class="col-sm-3">
+			<ul class="nav nav-pills nav-stacked" role="tablist">
+				<li role="presentation" class="active"><a href="#step1" aria-controls="step1" role="tab" data-toggle="tab"><b>STEP 1:</b> <small>Before Image Selection</small> <span class="fa fa-angle-right pull-right"></span></a></li>
+				<li role="presentation"><a href="#step2" aria-controls="step2" role="tab" data-toggle="tab"><b>STEP 2:</b> <small>After Image Selection</small> <span class="fa fa-angle-right pull-right"></span></a></li>
+				<li role="presentation"><a href="#step3" aria-controls="step3" role="tab" data-toggle="tab"><b>STEP 3:</b> <small>During Image Processing</small> <span class="fa fa-angle-right pull-right"></span></a></li>
+				<li role="presentation"><a href="#step4" aria-controls="step4" role="tab" data-toggle="tab" id="fadeInOut"><b>STEP 4:</b> <small>After Image Processing</small> <span class="fa fa-angle-right pull-right"></span></a></li>
+				<li role="presentation"><a href="#step5" aria-controls="step5" role="tab" data-toggle="tab"><b>STEP 5:</b> <small>Complete</small> <span class="fa fa-angle-right pull-right"></span></a></li>
+			</ul>
+		</div>
+		<div class="col-sm-9">
+			<div role="tabpanel">
+				<div class="tab-content">
+					<div role="tabpanel" class="tab-pane active" id="step1">
+						<h4>Before Image Selection</h4>
+						<div class="avatarWrapper">
+							<div class="avatar cursor-pointer">
+								<div class="uploadOverlay"><i class="fa fa-cloud-upload"></i></div>
+								<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/20625/avatar-bg.png">
+							</div>
+						</div>
+						<blockquote>Before a user uploads their avatar, if they hover over the placeholder, it will show the upload button, if they click it will allow them to browse for an image to upload.</blockquote>
+					</div>
+					<div role="tabpanel" class="tab-pane" id="step2">
+						<h4>After Image Selection</h4>
+						<div class="avatarWrapper">
+							<div class="avatarNav">
+								<a href="#" class="avZoomIn" data-toggle="tooltip" data-placement="right" title="Zoom In"><span class="fa fa-plus-circle"></span></a>
+								<a href="#" class="avZoomOut" data-toggle="tooltip" data-placement="right" title="Zoom Out"><span class="fa fa-minus-circle"></span></a>
+								<a href="#" class="avSave" data-toggle="tooltip" data-placement="right" title="Save"><span class="fa fa-cloud-upload"></span></a>
+								<span class="divider"><span class="fa fa-ellipsis-h"></span></span>
+								<a href="#" class="avDelete" data-toggle="tooltip" data-placement="right" title="Delete"><span class="fa fa-trash"></span></a>
+							</div>
+							<div class="avatar active cursor-move">
+								<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/20625/chris-02-800x800.jpg">
+							</div>
+						</div>
+						<blockquote>After the user has seleted their avatar image it will appear in the avatar placeholder window.  This window will allow the user to zoom in and out, and drag the image around to place where they like.</blockquote>
+					</div>
+					<div role="tabpanel" class="tab-pane" id="step3">
+						<h4>During Image Processing</h4>
+						<div class="avatarWrapper">
+							<div class="avatar cursor-wait">
+								<div class="processingOverlay"></div>
+								<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/20625/chris-02-800x800.jpg">
+							</div>
+						</div>
+						<blockquote>After the user clicks on the save button, the image will be resized and cropped on the client side before it is automatically uploaded to the server.</blockquote>
+					</div>
+					<div role="tabpanel" class="tab-pane" id="step4">
+						<h4>After Image Processing</h4>
+						<div class="avatarWrapper">
+							<div class="avatar">
+								<div class="uploadCompleteOverlay cursor-wait"><i class="fa fa-check"></i></div>
+								<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/20625/chris-02-800x800.jpg">
+							</div>
+						</div>
+						<blockquote>After processing, the window will show a green background with a check mark giving the user some feedback that their avatar was uploaded to the server successfully, then will fade out after a few seconds to show their final avatar.</blockquote>
+					</div>
+					<div role="tabpanel" class="tab-pane" id="step5">
+						<h4>After Image Upload Complete</h4>
+	<div class="avatarWrapper">
+		<div class="avatar cursor-pointer">
+			<div class="uploadOverlay"><i class="fa fa-cloud-upload"></i></div>
+			<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/20625/chris-02-800x800.jpg">
+		</div>
+	</div>
+	<blockquote>If the user hovers over their avatar again it will show the upload button again to start the process over if they wish to replace their current avatar.</blockquote>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

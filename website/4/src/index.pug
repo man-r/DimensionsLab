@@ -1,0 +1,28 @@
+mixin file(name, size, status)
+  .file
+    .file-description
+      .file-name
+        | #{name}
+      .file-size
+        | #{size}MB
+    .file-status
+      .status-field
+        .status-line(style="width: #{status}%")
+        
+main
+  p#inspired-by inspired by 
+    a(href="https://dribbble.com/shots/2481317-031-DailyUI-File-Upload" target="_blank") this
+    |  work
+  .upload
+    .upload-field
+      .icon-field
+        span(class="fa fa-file-o")
+        p Drag your files here
+    .upload-status
+      h1 File upload
+      +file("any_file.txt", "0.3", "91")
+      +file("another_file.txt", "0.6", "79")
+      +file("plan_on_1-02-13.txt", "0.12", "34")
+      form
+        input(type="text" placeholder="URL to the file")#upload-field
+        input(type="button" value="UPLOAD")#upload-btn.focus-out
