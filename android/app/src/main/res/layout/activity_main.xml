@@ -34,11 +34,13 @@
         android:layout_weight="1"
         android:orientation="vertical"
         android:gravity="center">
+
         <ImageButton
             android:id="@+id/selectfilebutton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/select_stl_img"
+            android:src="@drawable/fan"
+            android:background="@null"
             android:text="Select Stl File" />
         <TextView
             android:layout_width="wrap_content"

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <title>Dimensions Lab</title>
+
+    <link rel="stylesheet" href="./app.css">
+
+</head>
+
+<body>
+
+    <h2>Dimensions Lab</h2>
+    <p>The select element defines a drop-down list:</p>
+    
+    <form action="/action_page.php">
+        <input type="text" placeholder="Name" id="title"/> <br><br>
+        <input type="email" placeholder="E-mail" id="email"/><br><br>
+        <input type="number" placeholder="phone number" id="phone"/><br><br>
+        <input type="text" placeholder="Country" name="country" id="country"><br><br>
+        <input type="text" placeholder="Title" id="title"/><br><br>
+        <input type="text" placeholder="Title" id="title"/><br><br>
+        
+        <select name="filament" id="category">
+            <option value="pla">PLA</option>
+            <option value="abs">ABS</option>
+            <option value="wood">WOOD</option>
+            <option value="carbon">CARBON</option>
+        </select>
+        <br><br>
+        <select name="color" id="color">
+            <option value="white">white</option>
+            <option value="black">black</option>
+            <option value="red">red</option>
+            <option value="blue">blue</option>
+        </select>
+        <br><br>
+        Select STL files: <input type="file" name="stl" multiple>    
+        <br><br>
+        <input type="submit">
+    </form>
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="./app.js"></script>
+    <script>
+        autocomplete(document.getElementById("country"), countries);
+    </script>
+</body>
+</html>

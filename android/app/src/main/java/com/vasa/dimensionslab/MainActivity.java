@@ -114,7 +114,7 @@ public class MainActivity extends Activity {
 
         RotateAnimation rotate = new RotateAnimation(0, 360, Animation.RELATIVE_TO_SELF,
                 0.5f,  Animation.RELATIVE_TO_SELF, 0.5f);
-        //rotate.setRepeatCount(Animation.INFINITE);
+        rotate.setRepeatCount(10);
         rotate.setDuration(500);
         selectFileButton.startAnimation(rotate);
     }
